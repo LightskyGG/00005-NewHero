@@ -22,12 +22,6 @@ local function ApplyCVars()
 	end
 end
 
-local function ApplyCooldownManagerProfile()
-	local profileKeys = CooldownManagerCenteredDB and CooldownManagerCenteredDB.profileKeys
-	if not profileKeys then return end
-	profileKeys[GetUnitName("player") .. " - " .. GetRealmName()] = ns.config.cooldownManagerProfile
-end
-
 local function ApplyAddonVariables()
 	for variable, value in pairs(ns.AddonVariables) do
 		_G[variable] = value
@@ -49,7 +43,6 @@ end
 
 function ns.ApplySettings()
 	ApplyCVars()
-	ApplyCooldownManagerProfile()
 	ApplyAddonVariables()
 	ApplyEditModeLayout()
 end

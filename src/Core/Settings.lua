@@ -15,24 +15,6 @@ local function GetLayoutOptions()
 	return container:GetData()
 end
 
-local function GetProfileOptions()
-	local profileNames = { ns.config.cooldownManagerProfile }
-	local savedProfiles = CooldownManagerCenteredDB and CooldownManagerCenteredDB.profiles
-	if savedProfiles then
-		profileNames = {}
-		for profileName in pairs(savedProfiles) do
-			profileNames[#profileNames + 1] = profileName
-		end
-		table.sort(profileNames)
-	end
-
-	local container = Settings.CreateControlTextContainer()
-	for _, profileName in ipairs(profileNames) do
-		container:Add(profileName, profileName)
-	end
-	return container:GetData()
-end
-
 local function CreateCVarControl(category, entry)
 	local isCheckbox = type(entry.default) == "boolean"
 	local setting = Settings.RegisterAddOnSetting(
@@ -68,17 +50,6 @@ function ns.InitSettings()
 		ns.Defaults.editModeLayout
 	)
 	Settings.CreateDropdown(category, layoutSetting, GetLayoutOptions, "Layout activated on each character. Skipped if the character lacks it.")
-
-	local profileSetting = Settings.RegisterAddOnSetting(
-		category,
-		"NEWHERO_COOLDOWN_MANAGER_PROFILE",
-		"cooldownManagerProfile",
-		ns.config,
-		Settings.VarType.String,
-		"Cooldown Manager Profile",
-		ns.Defaults.cooldownManagerProfile
-	)
-	Settings.CreateDropdown(category, profileSetting, GetProfileOptions, "Cooldown Manager Centered profile assigned to each character.")
 
 	Settings.RegisterAddOnCategory(category)
 

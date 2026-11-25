@@ -26,6 +26,7 @@ end
 local function InitializeConfig()
 	NEWHERO_CONFIG = ApplyDefaults(NEWHERO_CONFIG or {}, ns.Defaults)
 	NEWHERO_DATA = ApplyDefaults(NEWHERO_DATA or {}, ns.DataDefaults)
+	NEWHERO_CONFIG.cooldownManagerProfile = nil
 	ApplyCVarDefaults(NEWHERO_CONFIG.cvars)
 	ns.config = NEWHERO_CONFIG
 	ns.db = NEWHERO_DATA
