@@ -1,7 +1,7 @@
 ## Interface: 120105, 16001
 ## ExcludeLoadGameType: plunderstorm, wowhack
 ## Title: NewHero
-## Notes: One-click setup for every new character.
+## Notes: (Almost) One-click setup for every new character.
 ## Version: 2026.11.24
 ## Author: LightskyGG
 ## SavedVariables: NEWHERO_CONFIG, NEWHERO_DATA
