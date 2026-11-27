@@ -2,7 +2,7 @@
 ## ExcludeLoadGameType: plunderstorm, wowhack
 ## Title: NewHero
 ## Notes: (Almost) One-click setup for every new character.
-## Version: 2026.11.24
+## Version: 2026.11.27
 ## Author: LightskyGG
 ## SavedVariables: NEWHERO_CONFIG, NEWHERO_DATA
 ## IconTexture: Interface\ICONS\achievement_character_human_male
@@ -10,9 +10,10 @@
 
 Data\Defaults.lua
 Data\Setup.lua
-Core\Initialize.lua
 Core\Util.lua
+Core\Initialize.lua
 Core\Settings.lua
 Core\Apply.lua
 Core\AddonSets.lua
+Core\ActionBars.lua
 Core\UI.lua

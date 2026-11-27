@@ -9,6 +9,7 @@ ns.Defaults = {
 
 ns.DataDefaults = {
 	completed = {},
+	actionBarLayouts = {},
 }
 
 ns.Layout = {
@@ -21,3 +22,11 @@ ns.Layout = {
 
 -- Blizzard's Modern and Classic presets precede custom layouts in layout indexes.
 ns.EditModePresetCount = 2
+
+ns.ActionSlotCount = {
+	Retail = 180,
+	Forever = 120,
+}
+
+-- Character macros are indexed after the account macro range.
+ns.AccountMacroCount = 120

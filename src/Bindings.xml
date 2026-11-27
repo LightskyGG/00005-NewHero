@@ -1,0 +1,5 @@
+<Bindings>
+	<Binding name="NEWHERO_LOAD_ACTION_BARS" header="NEWHERO" category="ADDONS">
+		NewHero_OpenActionBars()
+	</Binding>
+</Bindings>

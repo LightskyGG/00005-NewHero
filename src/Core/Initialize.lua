@@ -35,16 +35,30 @@ end
 local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("ADDON_LOADED")
 eventFrame:RegisterEvent("PLAYER_LOGIN")
-eventFrame:SetScript("OnEvent", function(self, event, loadedAddon)
-	if event == "PLAYER_LOGIN" then
+eventFrame:RegisterEvent("PLAYER_ENTERING_WORLD")
+eventFrame:RegisterEvent("ACTIONBAR_SLOT_CHANGED")
+eventFrame:RegisterEvent("PLAYER_LOGOUT")
+if ns.IsRetail then
+	eventFrame:RegisterEvent("PLAYER_SPECIALIZATION_CHANGED")
+end
+eventFrame:SetScript("OnEvent", function(self, event, arg1)
+	if event == "ACTIONBAR_SLOT_CHANGED" then
+		ns.OnActionSlotChanged(arg1)
+	elseif event == "PLAYER_ENTERING_WORLD" then
+		self:UnregisterEvent(event)
+		ns.CaptureActionBars()
+	elseif event == "PLAYER_SPECIALIZATION_CHANGED" then
+		if arg1 == "player" then
+			ns.CaptureActionBars()
+		end
+	elseif event == "PLAYER_LOGOUT" then
+		ns.SaveActionBars()
+	elseif event == "PLAYER_LOGIN" then
 		self:UnregisterEvent(event)
 		ns.InitUI()
-		return
+	elseif arg1 == addonName then
+		self:UnregisterEvent(event)
+		InitializeConfig()
+		ns.InitSettings()
 	end
-
-	if loadedAddon ~= addonName then return end
-	self:UnregisterEvent(event)
-
-	InitializeConfig()
-	ns.InitSettings()
 end)
