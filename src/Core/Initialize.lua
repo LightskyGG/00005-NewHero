@@ -24,8 +24,8 @@ local function ApplyCVarDefaults(cvarValues)
 end
 
 local function RemoveInvalidLayouts(layouts)
-	for key in pairs(layouts) do
-		if strmatch(key, ":0$") then
+	for key, layout in pairs(layouts) do
+		if strmatch(key, ":0$") or strmatch(layout.name, " %- $") then
 			layouts[key] = nil
 		end
 	end

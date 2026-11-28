@@ -9,7 +9,7 @@ local function GetSpecInfo()
 	local specIndex = GetSpecialization()
 	if not specIndex then return end
 	local specID, specName = GetSpecializationInfo(specIndex)
-	if specID and specID > 0 then
+	if specID and specID > 0 and specName and specName ~= "" then
 		return specID, specName
 	end
 end
