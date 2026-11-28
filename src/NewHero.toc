@@ -2,7 +2,7 @@
 ## ExcludeLoadGameType: plunderstorm, wowhack
 ## Title: NewHero
 ## Notes: (Almost) One-click setup for every new character.
-## Version: 2026.11.27
+## Version: 2026.11.27.1
 ## Author: LightskyGG
 ## SavedVariables: NEWHERO_CONFIG, NEWHERO_DATA
 ## IconTexture: Interface\ICONS\achievement_character_human_male

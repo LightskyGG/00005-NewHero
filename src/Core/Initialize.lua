@@ -23,11 +23,20 @@ local function ApplyCVarDefaults(cvarValues)
 	end
 end
 
+local function RemoveInvalidLayouts(layouts)
+	for key in pairs(layouts) do
+		if strmatch(key, ":0$") then
+			layouts[key] = nil
+		end
+	end
+end
+
 local function InitializeConfig()
 	NEWHERO_CONFIG = ApplyDefaults(NEWHERO_CONFIG or {}, ns.Defaults)
 	NEWHERO_DATA = ApplyDefaults(NEWHERO_DATA or {}, ns.DataDefaults)
 	NEWHERO_CONFIG.cooldownManagerProfile = nil
 	ApplyCVarDefaults(NEWHERO_CONFIG.cvars)
+	RemoveInvalidLayouts(NEWHERO_DATA.actionBarLayouts)
 	ns.config = NEWHERO_CONFIG
 	ns.db = NEWHERO_DATA
 end

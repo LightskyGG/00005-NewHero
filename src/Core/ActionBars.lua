@@ -8,7 +8,10 @@ local function GetSpecInfo()
 	if not ns.IsRetail then return end
 	local specIndex = GetSpecialization()
 	if not specIndex then return end
-	return GetSpecializationInfo(specIndex)
+	local specID, specName = GetSpecializationInfo(specIndex)
+	if specID and specID > 0 then
+		return specID, specName
+	end
 end
 
 function ns.GetLayoutKey()
@@ -24,8 +27,6 @@ local function GetLayoutName()
 end
 
 local currentSlots
-local currentKey
-local currentName
 
 local function CaptureSlot(slot)
 	local actionType, id = GetActionInfo(slot)
@@ -41,8 +42,6 @@ local function CaptureSlot(slot)
 end
 
 function ns.CaptureActionBars()
-	currentKey = ns.GetLayoutKey()
-	currentName = GetLayoutName()
 	currentSlots = {}
 	for slot = 1, slotCount do
 		CaptureSlot(slot)
@@ -73,14 +72,16 @@ end
 
 function ns.SaveActionBars()
 	if not currentSlots or not ns.db.completed[UnitGUID("player")] then return end
+	if ns.IsRetail and not GetSpecInfo() then return end
 
-	local savedLayout = ns.db.actionBarLayouts[currentKey]
+	local layoutKey = ns.GetLayoutKey()
+	local savedLayout = ns.db.actionBarLayouts[layoutKey]
 	local playerLevel = UnitLevel("player")
 	if savedLayout and (savedLayout.isPinned or playerLevel < savedLayout.level) then return end
 
 	local _, classFile = UnitClass("player")
-	ns.db.actionBarLayouts[currentKey] = {
-		name = currentName,
+	ns.db.actionBarLayouts[layoutKey] = {
+		name = GetLayoutName(),
 		classFile = classFile,
 		source = UnitName("player"),
 		level = playerLevel,
